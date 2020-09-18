@@ -6,16 +6,15 @@ use \app\models\Good;
 include dirname(__DIR__) . "/services/Autoload.php";      //<-- регистрация класса Autoload
 spl_autoload_register([(new Autoload()), 'load']);
 
-$db = new app\services\DB();
+$db = app\services\DB::getInstance();
 
 $good = new Good($db);
 $goodModel = $good->getOne(46);
 echo '<pre>';
 var_dump($goodModel);
 echo '<hr>';
-echo $good->getAll();
+var_dump($good->getAll());
 echo '<hr>';
-
 
 //$user = new app\models\User($db);
 //echo $user->getOne(12);

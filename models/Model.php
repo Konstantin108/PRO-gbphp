@@ -5,14 +5,19 @@ use app\services\DB;
 
 abstract class Model
 {
-    protected $db;
-    protected $tableName;
+    //protected $db;
+    //protected $tableName;
 
     abstract protected function getTableName():string;
 
-    public function __construct(DB $db)
+    //public function __construct(DB $db)
+    //{
+    //    $this->db = $db;
+    //}
+
+    protected function getDB()
     {
-        $this->db = $db;
+        return DB::getInstance();
     }
 
     public function getOne($id)
@@ -20,13 +25,28 @@ abstract class Model
         $tableName = $this->getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE id = :id ";
         $params = [':id' => $id];
-        return $this->db->find($sql, $params);
+        return $this->getDB()->find($sql, $params);
     }
 
     public function getAll()
     {
         $tableName = $this->getTableName();
         $sql = "SELECT * FROM {$tableName}";
-        return $this->db->findAll($sql);
+        return $this->getDB()->findAll($sql);
+    }
+
+    public function insert()
+    {
+
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function delete()
+    {
+
     }
 }

@@ -1,8 +1,11 @@
 <?php
 namespace app\services;
-
+use app\traits\SingletonTrait;
 class DB
 {
+
+     use SingletonTrait;
+
     private $config = [
         'driver' => 'mysql',
         'host' => '127.0.0.1',
@@ -41,16 +44,20 @@ class DB
         );
     }
 
-    public function find($sql, $params)
+    private function query($sql, $params = [])
     {
         $PDOStatement = $this->getConnection()->prepare($sql);
         $PDOStatement->execute($params);
-        return $PDOStatement->fetch();
+        return $PDOStatement;
     }
 
-    public function findAll($sql)
+    public function find($sql, $params)
     {
+        return $this->query($sql, $params)->fetch();
+    }
 
-        return 'findAll ' . $sql;
+    public function findAll($sql, $params = [])
+    {
+        return $this->query($sql, $params)->fetchAll();
     }
 }

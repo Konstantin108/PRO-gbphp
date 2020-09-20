@@ -17,38 +17,27 @@ spl_autoload_register([(new Autoload()), 'load']);
 //var_dump($user->getAll());      <-- Получение всех строк из таблицы users
 //echo '<hr>';
 
-$user = new \app\models\User();      //<-- Добавление строки в таблицы users
-$user->name = 'Мария';
-$user->login = 'user8';
-$user->password = '1238';
+$user = new \app\models\User();      //<-- Добавление строки в таблицу users
+$user->name = 'Курага';
+$user->login = 'user5';
+$user->password = '1235';
 $user->is_admin = 0;
-$user->position = 'designer';
+$user->position = 'cat';
+
 $user->save();
 
-$good = new \app\models\Good();      //<-- Добавление строки в таблицы goods
-$good->name = 'meizu m3 note';
-$good->price = '12990';
-$good->info = 'wide screen';
-$good->save();
+
+//$good = new \app\models\Good();      <-- Добавление строки в таблицу goods
+//$good->name = 'xiaomi mi9t';
+//$good->price = '26990';
+//$good->info = 'super phone';
+//$good->id = '50';
+//$good->save();
 
 echo '<pre>';
-var_dump($good);
+var_dump($user);
 
-//$user = new app\models\User($db);
-//echo $user->getOne(12);
-//echo '<hr>';
-//echo $user->getAll();
-//echo '<hr>';
-//
-//$order = new app\models\Order($db);
-//echo $order->getOne(7);
-//echo '<hr>';
-//echo $order->getAll();
-//echo '<hr>';
-//
-//$goodTest = new app\models\test\GoodTest($db);
-//echo $goodTest->getOne(7);
-//echo '<hr>';
-//echo $goodTest->getAll();
-//echo '<hr>';
+//$good = new \app\models\Good();      <-- Удаление строки из таблицы goods
+//$good->id = '98';
+//$good->delete();
 

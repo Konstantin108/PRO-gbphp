@@ -59,9 +59,28 @@ abstract class Model
 
     protected function update()
     {
-        //UPDATE `goods`
-        //SET `name` = ':name', `price` = ':price', `info` = ':info'
-        //WHERE `goods`.`id` = :id;
+                $fields = [];
+                $params = [];
+                $goodsId = [];
+                foreach ($this as $fieldName => $value){
+                    $fields[] = $fieldName;
+                    $params[":{$fieldName}"] = $value;
+                }
+
+                foreach($fields as $value){
+                    $fixFields[] = $value = $value . ' = :' . $value;
+                }
+                $shiftFields = array_shift($fixFields);
+                $string = implode(', ', $fixFields);
+
+                $sql = sprintf(
+                    "UPDATE %s SET %s WHERE %s",      //<-- Заполнение всех столбцов из таблицы
+                    $this->getTableName(),
+                    $string,
+                    $shiftFields
+                );
+                $this->getDB()->execute($sql, $params);
+
     }
 
     public function save()
@@ -75,6 +94,11 @@ abstract class Model
 
     public function delete()
     {
-
+           $sql = sprintf(
+               "DELETE FROM %s WHERE id = %s",
+               $this->getTableName(),
+               $this->id
+           );
+           $this->getDB()->execute($sql, $params);
     }
 }

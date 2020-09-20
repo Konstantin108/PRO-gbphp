@@ -7,6 +7,8 @@ class User extends Model
     public $name;
     public $login;
     public $password;
+    public $is_admin;
+    public $position;
 
     protected function getTableName():string
     {

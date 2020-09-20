@@ -2,19 +2,37 @@
 use app\services\Autoload;
 
 use \app\models\Good;
+use \app\models\User;
 
 include dirname(__DIR__) . "/services/Autoload.php";      //<-- регистрация класса Autoload
 spl_autoload_register([(new Autoload()), 'load']);
 
-$db = app\services\DB::getInstance();
+//$db = app\services\DB::getInstance();
 
-$good = new Good($db);
-$goodModel = $good->getOne(46);
+//$user = new User($db);
+//$userModel = $user->getOne(83);      <-- Получение строк по id из таблицы users
+//echo '<pre>';
+//var_dump($userModel);
+//echo '<hr>';
+//var_dump($user->getAll());      <-- Получение всех строк из таблицы users
+//echo '<hr>';
+
+$user = new \app\models\User();      //<-- Добавление строки в таблицы users
+$user->name = 'Мария';
+$user->login = 'user8';
+$user->password = '1238';
+$user->is_admin = 0;
+$user->position = 'designer';
+$user->save();
+
+$good = new \app\models\Good();      //<-- Добавление строки в таблицы goods
+$good->name = 'meizu m3 note';
+$good->price = '12990';
+$good->info = 'wide screen';
+$good->save();
+
 echo '<pre>';
-var_dump($goodModel);
-echo '<hr>';
-var_dump($good->getAll());
-echo '<hr>';
+var_dump($good);
 
 //$user = new app\models\User($db);
 //echo $user->getOne(12);

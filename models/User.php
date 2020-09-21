@@ -10,7 +10,7 @@ class User extends Model
     public $is_admin;
     public $position;
 
-    protected function getTableName():string
+    protected static function getTableName():string
     {
         return 'users';
     }

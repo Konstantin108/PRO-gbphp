@@ -8,7 +8,7 @@ class Good extends Model
     public $price;
     public $info;
 
-    protected function getTableName():string
+    protected static function getTableName():string
     {
         return 'goods';
     }

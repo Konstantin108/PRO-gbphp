@@ -107,4 +107,5 @@ abstract class Model
            );
            static::getDB()->execute($sql);
     }
+
 }

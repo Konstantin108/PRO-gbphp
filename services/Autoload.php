@@ -14,7 +14,6 @@ class Autoload
          $fileName .= '.php';
             if (file_exists($fileName)){
                 include $fileName;
-
         }
     }
 }

@@ -26,3 +26,23 @@ if(class_exists($controllerClass)){
 }else{
     echo '404';
 }
+
+//------------- метод update -------------//
+
+
+//$user = new \app\models\User();      <-- Добавление строки в таблицу users или её изменение
+//$user->name = 'John';
+//$user->login = 'user6';
+//$user->password = '1236';
+//$user->is_admin = 0;
+//$user->id = '364';
+//$user->position = 'developer';
+
+//$user->save();
+
+
+//------------- метод delete -------------//
+
+//$user = new \app\models\User();      <-- Удаление строки
+//$user->id = '364';
+//$user->delete();

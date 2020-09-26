@@ -51,20 +51,35 @@ class UserController
         $name = $_POST['nameForUpdate'];
         $password = $_POST['passwordForUpdate'];
         $position = $_POST['positionForUpdate'];
+
+        $is_admin = $_POST['adminStat'];
+
         $user = new \app\models\User();
         $user->id = $id;
         $user->login = $login;
         $user->name = $name;
         $user->password = $password;
         $user->position = $position;
-        $user->is_admin = 0;
+
+        switch($is_admin){
+                    case 'yes':
+                        $is_admin = 2;
+                        break;
+                    case 'no';
+                        $is_admin = 0;
+                        break;
+                    default:
+                        $is_admin = 0;
+                        break;
+                }
+
+        $user->is_admin = $is_admin;
         if(!empty($login) && !empty($name) && !empty($password) && !empty($position)){
             $user->save();
             return $this->render('userUpdated');
         }else{
             return $this->render('emptyFields');
         }
-
     }
 
     public function delUserAction()

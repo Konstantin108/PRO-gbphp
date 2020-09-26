@@ -7,7 +7,7 @@
         <i class="fas fa-arrow-left"></i>
         <p class="back_text">назад</p>
     </a>
-    <?php if (!$user->id)  : ?>
+    <?php if (empty($_POST['idForUpdate'])) : ?>
         <h2 class="info_text">Пользователь успешно добавлен</h2>
     <?php else : ?>
         <h2 class="info_text">Данные успешно обновлены</h2>

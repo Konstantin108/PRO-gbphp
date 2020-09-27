@@ -3,38 +3,24 @@
 namespace app\controllers;
 use app\models\Good;
 
-class GoodController
+class GoodController extends Controller
 {
-    protected $action;
-    protected $actionDefault = 'all';
-
-    public function run($action)
-    {
-
-        if(empty($action)){
-            $action = $this->actionDefault;
-        }
-
-        $action .= "Action";
-
-        if(!method_exists($this, $action)){
-            return '404';
-        }
-
-        return $this->$action();
-    }
-
     public function allAction()
     {
         $goods = Good::getAll();
-        return $this->render('goodAll', ['goods' => $goods]);
+        return $this->renderer->render('goodAll',
+                                    [
+                                        'goods' => $goods,
+                                        'title' => 'Список товаров'
+                                    ]
+                                 );
     }
 
     public function oneAction()
     {
         $id = $this->getId();
         $good = Good::getOne($id);
-        return $this->render('goodOne',
+        return $this->renderer->render('goodOne',
                         [
                             'good' => $good,
                             'title' => $good->name
@@ -46,7 +32,7 @@ class GoodController
     {
         $id = $this->getId();
         $good = Good::getOne($id);
-        return $this->render('goodUpdate',
+        return $this->renderer->render('goodUpdate',
                         [
                             'good' => $good,
                             'title' => 'Редактирование ' . $good->name
@@ -76,7 +62,7 @@ class GoodController
                 return '';
 
             }else{
-                return $this->render('emptyFields',
+                return $this->renderer->render('emptyFields',
                                   [
                                       'title' => 'Ошибка редактирования'
                                   ]
@@ -88,7 +74,7 @@ class GoodController
     {
                 $id = $this->getId();
                 $good = Good::getOne($id);
-                return $this->render('goodDel',
+                return $this->renderer->render('goodDel',
                                  [
                                     'good' => $good,
                                     'title' => 'Удаление'
@@ -106,38 +92,4 @@ class GoodController
             return '';
     }
 
-    public function render($template, $params = [])
-    {
-        $content = $this->renderTmpl($template, $params);
-
-        $title = 'Список товаров';
-                if(!empty($params['title'])){
-                    $title = $params['title'];
-                }
-
-        return $this->renderTmpl(
-                        'layouts/main',
-                        [
-                            'content' => $content,
-                            'title' => $title
-                        ]
-                    );
-    }
-
-    public function renderTmpl($template, $params = [])
-    {
-        extract($params);
-
-        ob_start();
-        include dirname(__DIR__) . '/views/' . $template . '.php';
-        return ob_get_clean();
-    }
-
-    protected function getId()      //<-- получение id
-    {
-        if(empty($_GET['id'])){
-            return 0;
-        }
-        return (int)$_GET['id'];
-    }
 }

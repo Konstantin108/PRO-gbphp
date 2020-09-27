@@ -3,38 +3,20 @@
 namespace app\controllers;
 use app\models\User;
 
-class UserController
+class UserController extends Controller
 {
-    protected $action;
-    protected $actionDefault = 'all';
-
-    public function run($action)
-    {
-
-        if(empty($action)){
-            $action = $this->actionDefault;
-        }
-
-        $action .= "Action";
-
-        if(!method_exists($this, $action)){
-            return '404';
-        }
-
-        return $this->$action();
-    }
 
     public function allAction()
     {
         $users = User::getAll();
-        return $this->render('userAll', ['users' => $users]);
+        return $this->renderer->render('userAll', ['users' => $users]);
     }
 
     public function oneAction()
     {
         $id = $this->getId();
         $person = User::getOne($id);
-        return $this->render('userOne',
+        return $this->renderer->render('userOne',
                         [
                             'user' => $person,
                             'title' => $person->login
@@ -46,7 +28,7 @@ class UserController
     {
         $id = $this->getId();
         $person = User::getOne($id);
-        return $this->render('userUpdate',
+        return $this->renderer->render('userUpdate',
                         [
                             'user' => $person,
                             'title' => 'Редактирование ' . $person->login
@@ -86,13 +68,13 @@ class UserController
         $user->is_admin = $is_admin;
         if(!empty($login) && !empty($name) && !empty($password) && !empty($position)){
             $user->save();
-            return $this->render('userUpdated',
+            return $this->renderer->render('userUpdated',
                               [
                                   'title' => 'Данные обновлены'
                               ]
                            );
         }else{
-            return $this->render('emptyFields',
+            return $this->renderer->render('emptyFields',
                               [
                                   'title' => 'Ошибка редактирования'
                               ]
@@ -104,7 +86,7 @@ class UserController
     {
             $id = $this->getId();
             $person = User::getOne($id);
-            return $this->render('userDel',
+            return $this->renderer->render('userDel',
                              [
                                 'user' => $person,
                                 'title' => 'Удаление'
@@ -119,45 +101,11 @@ class UserController
         $user->id = $id;
         $user->delete();
 
-        return $this->render('userDeleted',
+        return $this->renderer->render('userDeleted',
                          [
                              'title' => 'Пользователь удалён'
                          ]
                       );
     }
 
-    public function render($template, $params = [])
-    {
-        $content = $this->renderTmpl($template, $params);
-
-        $title = 'Мой магазин';
-        if(!empty($params['title'])){
-            $title = $params['title'];
-        }
-
-        return $this->renderTmpl(
-                        'layouts/main',
-                        [
-                            'content' => $content,
-                            'title' => $title
-                        ]
-                    );
-    }
-
-    public function renderTmpl($template, $params = [])
-    {
-        extract($params);
-
-        ob_start();
-        include dirname(__DIR__) . '/views/' . $template . '.php';
-        return ob_get_clean();
-    }
-
-    protected function getId()      //<-- получение id
-    {
-        if(empty($_GET['id'])){
-            return 0;
-        }
-        return (int)$_GET['id'];
-    }
 }

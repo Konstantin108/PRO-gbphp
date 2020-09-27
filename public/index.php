@@ -1,5 +1,8 @@
 <?php
 use app\services\Autoload;
+include dirname(__DIR__) . '/vendor/autoload.php';
+
+new \Twig\Loader\FilesystemLoader();
 
 include dirname(__DIR__) . "/services/Autoload.php";      //<-- регистрация класса Autoload
 spl_autoload_register([(new Autoload()), 'load']);
@@ -18,10 +21,13 @@ $controllerClass = 'app\\controllers\\' . ucfirst($controllerName) . 'Controller
 
 
 if(class_exists($controllerClass)){
+
+    $renderer = new \app\services\RenderServices();
+
     /**
-    *$var \app\controllers\UserController $controller
+    *$var \app\controllers\Controller $controller
     */
-    $controller = new $controllerClass();
+    $controller = new $controllerClass($renderer);
     echo $controller->run($actionName);
 }else{
     echo '404';

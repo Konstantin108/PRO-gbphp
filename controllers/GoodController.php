@@ -42,6 +42,70 @@ class GoodController
                      );
     }
 
+    public function updateGoodAction()
+    {
+        $id = $this->getId();
+        $good = Good::getOne($id);
+        return $this->render('goodUpdate',
+                        [
+                            'good' => $good,
+                            'title' => 'Редактирование ' . $good->name
+                        ]
+                     );
+    }
+
+    public function getUpdateGoodAction()
+    {
+            $id = $_POST['idForUpdate'];
+            $name = $_POST['nameForUpdate'];
+            $price = $_POST['priceForUpdate'];
+            $info = $_POST['infoForUpdate'];
+
+            $counter = 1;
+
+            $good = new \app\models\Good();
+            $good->id = $id;
+            $good->name = $name;
+            $good->price = $price;
+            $good->info = $info;
+            $good->counter = $counter;
+
+            if(!empty($name) && !empty($price) && !empty($info) && !empty($counter)){
+                $good->save();
+                header('Location: /?c=good&a=all');
+                return '';
+
+            }else{
+                return $this->render('emptyFields',
+                                  [
+                                      'title' => 'Ошибка редактирования'
+                                  ]
+                               );
+            }
+    }
+
+    public function delGoodAction()
+    {
+                $id = $this->getId();
+                $good = Good::getOne($id);
+                return $this->render('goodDel',
+                                 [
+                                    'good' => $good,
+                                    'title' => 'Удаление'
+                                 ]
+                             );
+    }
+
+    public function getDelGoodAction()
+    {
+            $id = $_POST['idForDel'];
+            $good = new \app\models\Good();
+            $good->id = $id;
+            $good->delete();
+            header('Location: /?c=good&a=all');
+            return '';
+    }
+
     public function render($template, $params = [])
     {
         $content = $this->renderTmpl($template, $params);

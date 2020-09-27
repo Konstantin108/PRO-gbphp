@@ -1,11 +1,11 @@
 <?php
-use app\services\Autoload;
+
 include dirname(__DIR__) . '/vendor/autoload.php';
 
-new \Twig\Loader\FilesystemLoader();
+//new \Twig\Loader\FilesystemLoader();
 
-include dirname(__DIR__) . "/services/Autoload.php";      //<-- регистрация класса Autoload
-spl_autoload_register([(new Autoload()), 'load']);
+//include dirname(__DIR__) . "/services/Autoload.php";      <-- регистрация класса Autoload
+//spl_autoload_register([(new Autoload()), 'load']);
 
 $controllerName = 'user';      //<-- создание контроллера
 if(!empty(trim($_GET['c']))){
@@ -22,7 +22,7 @@ $controllerClass = 'app\\controllers\\' . ucfirst($controllerName) . 'Controller
 
 if(class_exists($controllerClass)){
 
-    $renderer = new \app\services\RenderServices();
+    $renderer = new \app\services\TwigRenderServices();
 
     /**
     *$var \app\controllers\Controller $controller

@@ -13,7 +13,7 @@
         <a href="?p=user&a=updateUser&id=<?= $user->id ?>">Редактировать</a>
         <a href="?c=user&a=delUser&id=<?= $user->id ?>" class="del">удалить пользователя</a><br><br>
     <?php break; ?>
-    <?php case 0: ?>
+    <?php case 3: ?>
         <a href="?p=user&a=updateUser&id=<?= $user->id ?>">Редактировать</a>
         <a href="?c=user&a=delUser&id=<?= $user->id ?>" class="del">удалить пользователя</a><br><br>
     <?php break; ?>

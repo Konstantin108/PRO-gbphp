@@ -88,11 +88,14 @@ li {
     border: burlywood;
     background-color: #689f38;
     position: relative;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .del_text{
     font-size: 24px;
     color: white;
+    text-align: center;
 }
 
 .alarm_text{

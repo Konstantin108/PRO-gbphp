@@ -61,20 +61,28 @@ class UserController
         $user->password = $password;
         $user->position = $position;
 
+        if(!empty($is_admin)){
+            $nowStat = $is_admin;
+        }else{}
+
         switch($is_admin){
                     case 'yes':
                         $is_admin = 2;
                         break;
                     case 'no';
-                        $is_admin = 0;
+                        $is_admin = 3;
                         break;
                     default:
-                        $is_admin = 0;
+                        $is_admin = $is_admin;
                         break;
                 }
 
         $user->is_admin = $is_admin;
-        if(!empty($login) && !empty($name) && !empty($password) && !empty($position)){
+        if(!empty($login) &&
+            !empty($name) &&
+            !empty($password) &&
+            !empty($position) &&
+            !empty($is_admin)){
             $user->save();
             return $this->render('userUpdated');
         }else{

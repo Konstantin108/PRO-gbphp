@@ -12,7 +12,7 @@
         <?php case 2: ?>
             <h3 style="color: red">данный пользователь имеет расширенные права</h3>
         <?php break; ?>
-        <?php case 0: ?>
+        <?php case 3: ?>
         <?php break; ?>
     <?php endswitch ?>
     <hr>

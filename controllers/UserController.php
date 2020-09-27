@@ -34,14 +34,24 @@ class UserController
     {
         $id = $this->getId();
         $person = User::getOne($id);
-        return $this->render('userOne', ['user' => $person]);
+        return $this->render('userOne',
+                        [
+                            'user' => $person,
+                            'title' => $person->login
+                        ]
+                     );
     }
 
     public function updateUserAction()
     {
         $id = $this->getId();
         $person = User::getOne($id);
-        return $this->render('userUpdate', ['user' => $person]);
+        return $this->render('userUpdate',
+                        [
+                            'user' => $person,
+                            'title' => 'Редактирование ' . $person->login
+                        ]
+                     );
     }
 
     public function getUpdateUserAction()
@@ -76,9 +86,17 @@ class UserController
         $user->is_admin = $is_admin;
         if(!empty($login) && !empty($name) && !empty($password) && !empty($position)){
             $user->save();
-            return $this->render('userUpdated');
+            return $this->render('userUpdated',
+                              [
+                                  'title' => 'Данные обновлены'
+                              ]
+                           );
         }else{
-            return $this->render('emptyFields');
+            return $this->render('emptyFields',
+                              [
+                                  'title' => 'Ошибка редактирования'
+                              ]
+                           );
         }
     }
 
@@ -86,7 +104,12 @@ class UserController
     {
             $id = $this->getId();
             $person = User::getOne($id);
-            return $this->render('userDel', ['user' => $person]);
+            return $this->render('userDel',
+                             [
+                                'user' => $person,
+                                'title' => 'Удаление'
+                             ]
+                         );
     }
 
     public function getDelUserAction()
@@ -96,16 +119,27 @@ class UserController
         $user->id = $id;
         $user->delete();
 
-        return $this->render('userDeleted');
+        return $this->render('userDeleted',
+                         [
+                             'title' => 'Пользователь удалён'
+                         ]
+                      );
     }
 
     public function render($template, $params = [])
     {
         $content = $this->renderTmpl($template, $params);
+
+        $title = 'Мой магазин';
+        if(!empty($params['title'])){
+            $title = $params['title'];
+        }
+
         return $this->renderTmpl(
                         'layouts/main',
                         [
-                            'content' => $content
+                            'content' => $content,
+                            'title' => $title
                         ]
                     );
     }

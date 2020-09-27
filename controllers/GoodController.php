@@ -34,16 +34,28 @@ class GoodController
     {
         $id = $this->getId();
         $good = Good::getOne($id);
-        return $this->render('goodOne', ['good' => $good]);
+        return $this->render('goodOne',
+                        [
+                            'good' => $good,
+                            'title' => $good->name
+                        ]
+                     );
     }
 
     public function render($template, $params = [])
     {
         $content = $this->renderTmpl($template, $params);
+
+        $title = 'Список товаров';
+                if(!empty($params['title'])){
+                    $title = $params['title'];
+                }
+
         return $this->renderTmpl(
                         'layouts/main',
                         [
-                            'content' => $content
+                            'content' => $content,
+                            'title' => $title
                         ]
                     );
     }

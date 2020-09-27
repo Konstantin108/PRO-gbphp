@@ -1,8 +1,13 @@
-<?php /** @var string $content */?>
+<?php
+/**
+* @var string $content
+* @var string $title
+*/
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Document</title>
+    <title><?= $title ?></title>
     <script src="https://kit.fontawesome.com/4bd251a57a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/style.css">
 </head>

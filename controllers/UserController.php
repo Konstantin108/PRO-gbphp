@@ -68,11 +68,8 @@ class UserController extends Controller
         $user->is_admin = $is_admin;
         if(!empty($login) && !empty($name) && !empty($password) && !empty($position)){
             $user->save();
-            return $this->renderer->render('userUpdated',
-                              [
-                                  'title' => 'Данные обновлены'
-                              ]
-                           );
+            header('Location: /?c=user&a=all');
+            return '';
         }else{
             return $this->renderer->render('emptyFields',
                               [
@@ -100,12 +97,8 @@ class UserController extends Controller
         $user = new \app\models\User();
         $user->id = $id;
         $user->delete();
-
-        return $this->renderer->render('userDeleted',
-                         [
-                             'title' => 'Пользователь удалён'
-                         ]
-                      );
+        header('Location: /?c=user&a=all');
+        return '';
     }
 
 }

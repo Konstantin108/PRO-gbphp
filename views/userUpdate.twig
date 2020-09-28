@@ -6,7 +6,7 @@
     {% else %}
         <h1 style="color: blue">Создание нового пользователя</h1>
     {% endif %}
-    <form method="post" action="?c=user&a=getUpdateUser">
+    <form method="post" action="/user/getUpdateUser">
         <input name="idForUpdate" value="{{ user.id }}" type="hidden">
         <input name="loginForUpdate" value="{{ user.login }}">
         <input name="nameForUpdate" value="{{ user.name }}"><br><br>
@@ -24,9 +24,9 @@
             <input type="submit" value="добавить" style="cursor: pointer"><br><br>
         {% endif %}
         {% if user.id %}
-            <a href="?c=user&a=one&id={{ user.id }}">назад</a>
+            <a href="/user/one/?id={{ user.id }}">назад</a>
         {% else %}
-            <a href="?c=user&a=all">назад</a>
+            <a href="/user/all">назад</a>
         {% endif %}
     </form>
 {% endblock %}

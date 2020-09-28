@@ -6,7 +6,7 @@
 {% else %}
     <h1 style="color: blue">Добавление нового товара</h1>
 {% endif %}
-		<form method="post" action="?c=good&a=getUpdateGood">
+		<form method="post" action="/good/getUpdateGood">
 		    <input name="idForUpdate" value="{{ good.id }}" type="hidden">
 			<input name="nameForUpdate" value="{{ good.name }}">
 			<input name="priceForUpdate" value="{{ good.price }}"><br><br>
@@ -17,9 +17,9 @@
 				<input type="submit" value="добавить" style="cursor: pointer"><br><br>
 			{% endif %}
 			{% if good.id %}
-				<a href="?c=good&a=one&id={{ good.id }}">назад</a>
+				<a href="/good/one/?id={{ good.id }}">назад</a>
 			{% else %}
-				<a href="?c=good&a=all">назад</a>
+				<a href="/good/all">назад</a>
 			{% endif %}
 		</form>
 {% endblock %}

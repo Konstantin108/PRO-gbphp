@@ -1,19 +1,16 @@
 <?php
 include dirname(__DIR__) . '/vendor/autoload.php';
 
+$request = new \app\services\Request();
+
 //new \Twig\Loader\FilesystemLoader();
 
 //include dirname(__DIR__) . "/services/Autoload.php";      <-- регистрация класса Autoload
 //spl_autoload_register([(new Autoload()), 'load']);
 
 $controllerName = 'user';      //<-- настройка контроллера
-if(!empty(trim($_GET['c']))){
-    $controllerName = trim($_GET['c']);
-}
-
-$actionName = '';
-if(!empty(trim($_GET['a']))){
-    $actionName = trim($_GET['a']);
+if(!empty($request->getActionName())){
+    $controllerName = $request->getControllerName();
 }
 
 $controllerClass = 'app\\controllers\\' . ucfirst($controllerName) . 'Controller';
@@ -26,14 +23,13 @@ if(class_exists($controllerClass)){
     /**
     *$var \app\controllers\Controller $controller
     */
-    $controller = new $controllerClass($renderer);
-    echo $controller->run($actionName);
+    $controller = new $controllerClass($renderer, $request);
+    echo $controller->run($request->getActionName());
 }else{
     echo '404';
 }
 
 //------------- метод update -------------//
-
 
 //$user = new \app\models\User();      <-- Добавление строки в таблицу users или её изменение
 //$user->name = 'John';
@@ -44,7 +40,6 @@ if(class_exists($controllerClass)){
 //$user->position = 'developer';
 
 //$user->save();
-
 
 //------------- метод delete -------------//
 

@@ -1,13 +1,15 @@
 <?php
 
 namespace app\controllers;
-use app\models\Good;
+
+use app\entities\Good;
+use app\repositories\GoodRepository;
 
 class GoodController extends Controller
 {
     public function allAction()
     {
-        $goods = Good::getAll();
+        $goods = (new GoodRepository())->getAll();
         return $this->renderer->render('goodAll',
                                     [
                                         'goods' => $goods,
@@ -19,7 +21,7 @@ class GoodController extends Controller
     public function oneAction()
     {
         $id = $this->getId();
-        $good = Good::getOne($id);
+        $good = (new GoodRepository())->getOne($id);
         return $this->renderer->render('goodOne',
                         [
                             'good' => $good,
@@ -31,7 +33,7 @@ class GoodController extends Controller
     public function updateGoodAction()
     {
         $id = $this->getId();
-        $good = Good::getOne($id);
+        $good = (new GoodRepository())->getOne($id);
         return $this->renderer->render('goodUpdate',
                         [
                             'good' => $good,
@@ -49,7 +51,7 @@ class GoodController extends Controller
 
             $counter = 1;
 
-            $good = new \app\models\Good();
+            $good = new Good();
             $good->id = $id;
             $good->name = $name;
             $good->price = $price;
@@ -57,8 +59,8 @@ class GoodController extends Controller
             $good->counter = $counter;
 
             if(!empty($name) && !empty($price) && !empty($info) && !empty($counter)){
-                $good->save();
-                header('Location: /?c=good&a=all');
+                (new GoodRepository())->save($good);
+                header('Location: /good/all');   //<--путь изменён для twig
                 return '';
 
             }else{
@@ -73,7 +75,7 @@ class GoodController extends Controller
     public function delGoodAction()
     {
                 $id = $this->getId();
-                $good = Good::getOne($id);
+                $good = (new GoodRepository())->getOne($id);
                 return $this->renderer->render('goodDel',
                                  [
                                     'good' => $good,
@@ -85,10 +87,10 @@ class GoodController extends Controller
     public function getDelGoodAction()
     {
             $id = $_POST['idForDel'];
-            $good = new \app\models\Good();
+            $good = new Good();
             $good->id = $id;
-            $good->delete();
-            header('Location: /?c=good&a=all');
+            (new GoodRepository())->delete($good);
+            header('Location: /good/all');   //<--путь изменён для twig
             return '';
     }
 

@@ -1,21 +1,23 @@
 <?php
 
 namespace app\controllers;
-use app\models\User;
+
+use app\entities\User;
+use app\repositories\UserRepository;
 
 class UserController extends Controller
 {
 
     public function allAction()
     {
-        $users = User::getAll();
+        $users = (new UserRepository())->getAll();   //<--изменение для репозиториев и сущностей
         return $this->renderer->render('userAll', ['users' => $users]);
     }
 
     public function oneAction()
     {
         $id = $this->getId();
-        $person = User::getOne($id);
+        $person = (new UserRepository())->getOne($id);   //<--изменение для репозиториев и сущностей
         return $this->renderer->render('userOne',
                         [
                             'user' => $person,
@@ -27,7 +29,7 @@ class UserController extends Controller
     public function updateUserAction()
     {
         $id = $this->getId();
-        $person = User::getOne($id);
+        $person = (new UserRepository())->getOne($id);   //<--изменение для репозиториев и сущностей
         return $this->renderer->render('userUpdate',
                         [
                             'user' => $person,
@@ -46,7 +48,7 @@ class UserController extends Controller
 
         $is_admin = $_POST['adminStat'];
 
-        $user = new \app\models\User();
+        $user = new User();   //<--изменение для репозиториев и сущностей
         $user->id = $id;
         $user->login = $login;
         $user->name = $name;
@@ -67,8 +69,8 @@ class UserController extends Controller
 
         $user->is_admin = $is_admin;
         if(!empty($login) && !empty($name) && !empty($password) && !empty($position)){
-            $user->save();
-            header('Location: /?c=user&a=all');
+            (new UserRepository())->save($user);   //<--изменение для репозиториев и сущностей
+            header('Location: /user/all');   //<--путь изменён для twig
             return '';
         }else{
             return $this->renderer->render('emptyFields',
@@ -82,7 +84,7 @@ class UserController extends Controller
     public function delUserAction()
     {
             $id = $this->getId();
-            $person = User::getOne($id);
+            $person = (new UserRepository())->getOne($id);   //<--изменение для репозиториев и сущностей
             return $this->renderer->render('userDel',
                              [
                                 'user' => $person,
@@ -94,10 +96,10 @@ class UserController extends Controller
     public function getDelUserAction()
     {
         $id = $_POST['idForDel'];
-        $user = new \app\models\User();
+        $user = new User();   //<--изменение для репозиториев и сущностей
         $user->id = $id;
-        $user->delete();
-        header('Location: /?c=user&a=all');
+        (new UserRepository())->delete($user);   //<--изменение для репозиториев и сущностей
+        header('Location: /user/all');   //<--путь изменён для twig
         return '';
     }
 

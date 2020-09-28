@@ -8,12 +8,12 @@
         <h3 style="color: red">данный пользователь является администратором</h3>
 {% elseif user.is_admin == 2 %}
         <h3 style="color: red">данный пользователь имеет расширенные права</h3>
-        <a href="?p=user&a=updateUser&id={{ user.id }}">Редактировать</a>
-        <a href="?c=user&a=delUser&id={{ user.id }}" class="del">удалить пользователя</a><br><br>
+        <a href="/user/updateUser/?id={{ user.id }}">Редактировать</a>
+        <a href="/user/delUser/?id={{ user.id }}" class="del">удалить пользователя</a><br><br>
 {% else %}
-        <a href="?p=user&a=updateUser&id={{ user.id }}">Редактировать</a>
-        <a href="?c=user&a=delUser&id={{ user.id }}" class="del">удалить пользователя</a><br><br>
+        <a href="/user/updateUser/?id={{ user.id }}">Редактировать</a>
+        <a href="/user/delUser/?id={{ user.id }}" class="del">удалить пользователя</a><br><br>
 {% endif %}
-<a href="?c=user&a=all">назад</a>
+<a href="/user/all">назад</a>
 <hr>
 {% endblock %}

@@ -1,8 +1,8 @@
 {% extends 'layouts/main.twig' %}
 {% block title %}Удаление пользователя{% endblock %}
 {% block content %}
-<form method="post" class="del_block" action="?c=user&a=getDelUser">
-    <a href="?c=user&a=one&id={{ user.id }}" class="back">
+<form method="post" class="del_block" action="/user/getDelUser">
+    <a href="/user/one/?id={{ user.id }}" class="back">
         <i class="fas fa-arrow-left"></i>
         <p class="back_text">назад</p>
     </a>
@@ -11,7 +11,7 @@
     <p class="alarm_text">Восстановить данные будет невозможно</p>
     <div class="btn_block">
         <input type="submit" value="удаление" class="del_group_btn">
-        <a href="?c=user&a=one&id={{ user.id }}" class="cancel_group_btn">отмена</a>
+        <a href="/user/one/?id={{ user.id }}" class="cancel_group_btn">отмена</a>
     </div>
 </form>
 {% endblock %}

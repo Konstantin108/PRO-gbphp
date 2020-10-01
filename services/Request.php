@@ -14,6 +14,7 @@ class Request
 
     public function __construct()
     {
+        session_start();
         $this->requestString = $_SERVER['REQUEST_URI'];
         $this->parseRequest();
         $this->fillParams();
@@ -57,5 +58,21 @@ class Request
               return 0;
             }
               return (int)$this->params['get']['id'];
+        }
+
+        public function getSession($key = null)
+        {
+            if(empty($key)){
+                return $_SESSION;
+            }
+            if (empty($_SESSION[$key])){
+                return [];
+            }
+            return $_SESSION[$key];
+        }
+
+        public function setSession($key, $value)
+        {
+            $_SESSION[$key] = $value;
         }
 }

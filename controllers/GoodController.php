@@ -9,11 +9,10 @@ class GoodController extends Controller
 {
     public function allAction()
     {
-        $goods = (new GoodRepository())->getAll();
+        $goods = $this->container->goodRepository->getAll();
         return $this->renderer->render('goodAll',
                                     [
                                         'goods' => $goods,
-                                        'title' => 'Список товаров'
                                     ]
                                  );
     }
@@ -21,11 +20,10 @@ class GoodController extends Controller
     public function oneAction()
     {
         $id = $this->getId();
-        $good = (new GoodRepository())->getOne($id);
+        $good = $this->container->goodRepository->getOne($id);
         return $this->renderer->render('goodOne',
                         [
                             'good' => $good,
-                            'title' => $good->name
                         ]
                      );
     }
@@ -33,11 +31,10 @@ class GoodController extends Controller
     public function updateGoodAction()
     {
         $id = $this->getId();
-        $good = (new GoodRepository())->getOne($id);
+        $good = $this->container->goodRepository->getOne($id);
         return $this->renderer->render('goodUpdate',
                         [
                             'good' => $good,
-                            'title' => 'Редактирование ' . $good->name
                         ]
                      );
     }
@@ -59,27 +56,22 @@ class GoodController extends Controller
             $good->counter = $counter;
 
             if(!empty($name) && !empty($price) && !empty($info) && !empty($counter)){
-                (new GoodRepository())->save($good);
+                $this->container->goodRepository->save($good);
                 header('Location: /good/all');   //<--путь изменён для twig
                 return '';
 
             }else{
-                return $this->renderer->render('emptyFields',
-                                  [
-                                      'title' => 'Ошибка редактирования'
-                                  ]
-                               );
+                return $this->renderer->render('emptyFields');
             }
     }
 
     public function delGoodAction()
     {
                 $id = $this->getId();
-                $good = (new GoodRepository())->getOne($id);
+                $good = $this->container->goodRepository->getOne($id);
                 return $this->renderer->render('goodDel',
                                  [
                                     'good' => $good,
-                                    'title' => 'Удаление'
                                  ]
                              );
     }
@@ -89,7 +81,7 @@ class GoodController extends Controller
             $id = $_POST['idForDel'];
             $good = new Good();
             $good->id = $id;
-            (new GoodRepository())->delete($good);
+            $this->container->goodRepository->delete($good);
             header('Location: /good/all');   //<--путь изменён для twig
             return '';
     }

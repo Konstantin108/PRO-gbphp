@@ -10,18 +10,17 @@ class UserController extends Controller
 
     public function allAction()
     {
-        $users = (new UserRepository())->getAll();   //<--изменение для репозиториев и сущностей
+        $users = $this->container->userRepository->getAll();   //<--изменение для репозиториев и сущностей
         return $this->renderer->render('userAll', ['users' => $users]);
     }
 
     public function oneAction()
     {
         $id = $this->getId();
-        $person = (new UserRepository())->getOne($id);   //<--изменение для репозиториев и сущностей
+        $person = $this->container->userRepository->getOne($id);   //<--изменение для репозиториев и сущностей
         return $this->renderer->render('userOne',
                         [
                             'user' => $person,
-                            'title' => $person->login
                         ]
                      );
     }
@@ -29,11 +28,10 @@ class UserController extends Controller
     public function updateUserAction()
     {
         $id = $this->getId();
-        $person = (new UserRepository())->getOne($id);   //<--изменение для репозиториев и сущностей
+        $person = $this->container->userRepository->getOne($id);   //<--изменение для репозиториев и сущностей
         return $this->renderer->render('userUpdate',
                         [
                             'user' => $person,
-                            'title' => 'Редактирование ' . $person->login
                         ]
                      );
     }
@@ -69,26 +67,21 @@ class UserController extends Controller
 
         $user->is_admin = $is_admin;
         if(!empty($login) && !empty($name) && !empty($password) && !empty($position)){
-            (new UserRepository())->save($user);   //<--изменение для репозиториев и сущностей
+            $this->container->userRepository->save($user);   //<--изменение для репозиториев и сущностей
             header('Location: /user/all');   //<--путь изменён для twig
             return '';
         }else{
-            return $this->renderer->render('emptyFields',
-                              [
-                                  'title' => 'Ошибка редактирования'
-                              ]
-                           );
+            return $this->renderer->render('emptyFields');
         }
     }
 
     public function delUserAction()
     {
             $id = $this->getId();
-            $person = (new UserRepository())->getOne($id);   //<--изменение для репозиториев и сущностей
+            $person = $this->container->userRepository->getOne($id);   //<--изменение для репозиториев и сущностей
             return $this->renderer->render('userDel',
                              [
                                 'user' => $person,
-                                'title' => 'Удаление'
                              ]
                          );
     }
@@ -98,7 +91,7 @@ class UserController extends Controller
         $id = $_POST['idForDel'];
         $user = new User();   //<--изменение для репозиториев и сущностей
         $user->id = $id;
-        (new UserRepository())->delete($user);   //<--изменение для репозиториев и сущностей
+        $this->container->userRepository->delete($user);   //<--изменение для репозиториев и сущностей
         header('Location: /user/all');   //<--путь изменён для twig
         return '';
     }

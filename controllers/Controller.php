@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\main\Container;
 use app\services\RenderServices;
 use app\services\Request;
 use app\services\RenderI;
@@ -16,12 +17,15 @@ abstract class Controller
 
     protected $request;
 
+    protected $container;
+
     /**
     *   Controller constructor.
     *   @param $renderer
     */
-    public function __construct(RenderI $renderer, Request $request)
+    public function __construct(RenderI $renderer, Request $request, Container $container)
     {
+        $this->container = $container;
         $this->renderer = $renderer;
         $this->request = $request;
     }
@@ -45,5 +49,21 @@ abstract class Controller
         protected function getId()      //<-- получение id
         {
             return $this->request->getId();
+        }
+
+        protected function redirect($path = '', $msg = '')
+        {
+            if(!empty($msg)){
+                $_SESSION['msg'] = $msg;
+            }
+            if(empty($path)){
+                if(empty($_SERVER['HTTP_REFERER'])){
+                    $path = '/';
+                }else{
+                    $path = $_SERVER['HTTP_REFERER'];
+                }
+            }
+            header('Location: ' . $path);
+            return '';
         }
 }

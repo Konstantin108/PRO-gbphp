@@ -1,33 +1,7 @@
 <?php
 include dirname(__DIR__) . '/vendor/autoload.php';
-
-$request = new \app\services\Request();
-
-//new \Twig\Loader\FilesystemLoader();
-
-//include dirname(__DIR__) . "/services/Autoload.php";      <-- регистрация класса Autoload
-//spl_autoload_register([(new Autoload()), 'load']);
-
-$controllerName = 'user';      //<-- настройка контроллера
-if(!empty($request->getActionName())){
-    $controllerName = $request->getControllerName();
-}
-
-$controllerClass = 'app\\controllers\\' . ucfirst($controllerName) . 'Controller';
-
-
-if(class_exists($controllerClass)){
-
-    $renderer = new \app\services\TwigRenderServices();
-
-    /**
-    *$var \app\controllers\Controller $controller
-    */
-    $controller = new $controllerClass($renderer, $request);
-    echo $controller->run($request->getActionName());
-}else{
-    echo '404';
-}
+$config = include dirname(__DIR__) . '/main/config.php';      //<-- В config записываются
+\app\main\App::call()->run($config);
 
 //------------- метод update -------------//
 

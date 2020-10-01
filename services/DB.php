@@ -4,18 +4,14 @@ use app\traits\SingletonTrait;
 class DB
 {
 
-     use SingletonTrait;
-
-    private $config = [
-        'driver' => 'mysql',
-        'host' => '127.0.0.1',
-        'db' => 'gbphp',
-        'charset' => 'UTF8',
-        'login' => 'root',
-        'password' => 'root'
-    ];
+    private $config;
 
     private $connection;
+
+    public function __construct($config)
+    {
+        $this->config = $config;
+    }
 
     public function getConnection()
     {

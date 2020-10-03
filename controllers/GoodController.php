@@ -10,7 +10,7 @@ class GoodController extends Controller
     public function allAction()
     {
         $goods = $this->container->goodRepository->getAll();
-        return $this->renderer->render('goodAll',
+        return $this->render('goodAll',
                                     [
                                         'goods' => $goods,
                                     ]
@@ -21,7 +21,7 @@ class GoodController extends Controller
     {
         $id = $this->getId();
         $good = $this->container->goodRepository->getOne($id);
-        return $this->renderer->render('goodOne',
+        return $this->render('goodOne',
                         [
                             'good' => $good,
                         ]
@@ -32,7 +32,7 @@ class GoodController extends Controller
     {
         $id = $this->getId();
         $good = $this->container->goodRepository->getOne($id);
-        return $this->renderer->render('goodUpdate',
+        return $this->render('goodUpdate',
                         [
                             'good' => $good,
                         ]
@@ -61,7 +61,7 @@ class GoodController extends Controller
                 return '';
 
             }else{
-                return $this->renderer->render('emptyFields');
+                return $this->render('emptyFields');
             }
     }
 
@@ -69,7 +69,7 @@ class GoodController extends Controller
     {
                 $id = $this->getId();
                 $good = $this->container->goodRepository->getOne($id);
-                return $this->renderer->render('goodDel',
+                return $this->render('goodDel',
                                  [
                                     'good' => $good,
                                  ]

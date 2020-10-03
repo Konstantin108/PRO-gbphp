@@ -44,7 +44,7 @@ class App
 
         if(class_exists($controllerClass)){
             $renderer = new \app\services\TwigRenderServices();
-            $controller = new $controllerClass($renderer, $request, $this->container);
+            $controller = new $controllerClass($request, $this->container);
             echo $controller->run($request->getActionName());
         }else{
             echo '404';

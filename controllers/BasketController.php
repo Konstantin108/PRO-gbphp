@@ -19,9 +19,12 @@ class BasketController extends Controller
 
    public function addAction()
    {
-       $id = $this->getId();
-       $goodRepository = $this->container->goodRepository;
-       $msg = (new BasketService())->add($id, $goodRepository, $this->request);
+
+       $msg = $this->container->basketService->add(
+            $this->getId(),
+            $this->container->goodRepository,
+            $this->request
+       );
        return $this->redirect('', $msg);
    }
 }

@@ -23,10 +23,9 @@ abstract class Controller
     *   Controller constructor.
     *   @param $renderer
     */
-    public function __construct(RenderI $renderer, Request $request, Container $container)
+    public function __construct(Request $request, Container $container)
     {
         $this->container = $container;
-        $this->renderer = $renderer;
         $this->request = $request;
     }
 
@@ -65,5 +64,10 @@ abstract class Controller
             }
             header('Location: ' . $path);
             return '';
+        }
+
+        protected function render($template, $params = [])
+        {
+              return $this->container->renderer->render($template, $params);
         }
 }

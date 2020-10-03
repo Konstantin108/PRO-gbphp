@@ -11,14 +11,14 @@ class UserController extends Controller
     public function allAction()
     {
         $users = $this->container->userRepository->getAll();   //<--изменение для репозиториев и сущностей
-        return $this->renderer->render('userAll', ['users' => $users]);
+        return $this->render('userAll', ['users' => $users]);
     }
 
     public function oneAction()
     {
         $id = $this->getId();
         $person = $this->container->userRepository->getOne($id);   //<--изменение для репозиториев и сущностей
-        return $this->renderer->render('userOne',
+        return $this->render('userOne',
                         [
                             'user' => $person,
                         ]
@@ -29,7 +29,7 @@ class UserController extends Controller
     {
         $id = $this->getId();
         $person = $this->container->userRepository->getOne($id);   //<--изменение для репозиториев и сущностей
-        return $this->renderer->render('userUpdate',
+        return $this->render('userUpdate',
                         [
                             'user' => $person,
                         ]
@@ -71,7 +71,7 @@ class UserController extends Controller
             header('Location: /user/all');   //<--путь изменён для twig
             return '';
         }else{
-            return $this->renderer->render('emptyFields');
+            return $this->render('emptyFields');
         }
     }
 
@@ -79,7 +79,7 @@ class UserController extends Controller
     {
             $id = $this->getId();
             $person = $this->container->userRepository->getOne($id);   //<--изменение для репозиториев и сущностей
-            return $this->renderer->render('userDel',
+            return $this->render('userDel',
                              [
                                 'user' => $person,
                              ]

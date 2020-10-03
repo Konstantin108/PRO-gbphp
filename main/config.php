@@ -14,7 +14,7 @@ return [
                 'password' => 'root'
             ]
         ],
-        'render' => [
+        'renderer' => [
             'class' => \app\services\TwigRenderServices::class,
         ],
         'goodRepository' => [
@@ -22,6 +22,9 @@ return [
         ],
         'userRepository' => [
                     'class' => \app\repositories\UserRepository::class,
-                ]
+        ],
+        'basketService' => [
+                    'class' => \app\services\BasketService::class,
+        ]
     ],
 ];

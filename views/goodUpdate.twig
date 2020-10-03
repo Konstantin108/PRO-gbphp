@@ -1,0 +1,25 @@
+{% extends 'layouts/main.twig' %}
+{% block title %}Редактирование {{ good.name }}{% endblock %}
+{% block content %}
+{% if good.id %}
+	<h1 style="color: blue">редактирование товара <span>{{ good.name }}</span></h1>
+{% else %}
+    <h1 style="color: blue">Добавление нового товара</h1>
+{% endif %}
+		<form method="post" action="/good/getUpdateGood">
+		    <input name="idForUpdate" value="{{ good.id }}" type="hidden">
+			<input name="nameForUpdate" value="{{ good.name }}">
+			<input name="priceForUpdate" value="{{ good.price }}"><br><br>
+			<input name="infoForUpdate" value="{{ good.info }}">
+			{% if good.id %}
+				<input type="submit" value="отредактировать" style="cursor: pointer"><br><br>
+			{% else %}
+				<input type="submit" value="добавить" style="cursor: pointer"><br><br>
+			{% endif %}
+			{% if good.id %}
+				<a href="/good/one/?id={{ good.id }}">назад</a>
+			{% else %}
+				<a href="/good/all">назад</a>
+			{% endif %}
+		</form>
+{% endblock %}

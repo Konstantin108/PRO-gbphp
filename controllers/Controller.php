@@ -70,4 +70,11 @@ abstract class Controller
         {
               return $this->container->renderer->render($template, $params);
         }
+
+        protected function sendJson($data)
+        {
+           header('Content-Type: application/json');
+
+           return json_encode($data);
+        }
 }

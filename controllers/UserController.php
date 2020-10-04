@@ -7,7 +7,6 @@ use app\repositories\UserRepository;
 
 class UserController extends Controller
 {
-
     public function allAction()
     {
         $users = $this->container->userRepository->getAll();   //<--изменение для репозиториев и сущностей

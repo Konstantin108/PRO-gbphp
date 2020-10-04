@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Сен 24 2020 г., 03:08
+-- Время создания: Окт 04 2020 г., 20:30
 -- Версия сервера: 5.7.29
 -- Версия PHP: 7.2.29
 
@@ -40,11 +40,9 @@ CREATE TABLE `goods` (
 --
 
 INSERT INTO `goods` (`id`, `name`, `price`, `info`, `counter`) VALUES
-(46, 'iphone 12pro', '89999', 'bestest phone', 1),
-(48, 'xiaomi mi5 plus', '16990', 'comfort phone', 1),
-(49, 'iphone 11', '46000', 'new model', 1),
-(50, 'xiaomi mi9t', '26990', 'super phone', 1),
-(51, 'meizu m2 mini', '7990', 'old model', 1);
+(91, 'Nokia 3310', '5990', 'super', 1),
+(92, 'Iphone 5s', '12990', 'super phone', 1),
+(93, 'Iphone 6', '12990', 'super', 1);
 
 -- --------------------------------------------------------
 
@@ -54,11 +52,20 @@ INSERT INTO `goods` (`id`, `name`, `price`, `info`, `counter`) VALUES
 
 CREATE TABLE `orders` (
   `id` int(100) NOT NULL,
-  `good_id` int(100) NOT NULL,
-  `item` varchar(150) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `price` int(100) NOT NULL,
-  `count` int(10) NOT NULL DEFAULT '1'
+  `info` varchar(200) NOT NULL,
+  `counter` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `orders`
+--
+
+INSERT INTO `orders` (`id`, `name`, `price`, `info`, `counter`) VALUES
+(4, 'nokia', 5990, 'good phone', 1),
+(5, 'sony', 5990, 'good', 1),
+(6, 'mobile', 456, 'good sound', 1);
 
 -- --------------------------------------------------------
 
@@ -81,9 +88,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `login`, `password`, `name`, `is_admin`, `position`) VALUES
 (356, 'admin', '$2y$10$IwX6/0//gF4qI/jLdqa4KeqLwUhsClGVr6MDly/H9HRAUCdYJAP2S', 'Konstantin', 1, 'admin'),
-(376, 'user3', '1233', 'Victor', 0, 'driver'),
-(377, 'user2', '1232', 'Vera', 0, 'designer'),
-(378, 'user4', '1234', 'Jack', 0, 'doctor');
+(378, 'user2', '1232', 'Vera', 0, 'manager'),
+(380, 'user3', '1233', 'Dima', 2, 'killer'),
+(381, 'user4', '1234', 'Kostya', 0, 'manager');
 
 --
 -- Индексы сохранённых таблиц
@@ -115,19 +122,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `goods`
 --
 ALTER TABLE `goods`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=379;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=382;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

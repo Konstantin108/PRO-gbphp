@@ -39,9 +39,6 @@ class App
 
         $controllerClass = 'app\\controllers\\' . ucfirst($controllerName) . 'Controller';
 
-
-//-------------остановка------------------------------
-
         if(class_exists($controllerClass)){
             $renderer = new \app\services\TwigRenderServices();
             $controller = new $controllerClass($request, $this->container);

@@ -11,28 +11,41 @@ class BasketService
 
     public function add($id, GoodRepository $goodRepository, Request $request)
     {
-        if(empty($id)){
-                    return 'нет id';
-               }
-               $good = $goodRepository->getOne($id);
-               if(empty($id)){
-                    return 'нет товара';
-               }
+        if (empty($id)) {
+            return 'нет id';
+        }
 
-                $goods = $request->getSession(self::BASKET_NAME);
+        /** @var Good $good */
+        $good = $goodRepository->getOne($id);
+        if (empty($good)) {
+            return 'нет товара';
+        }
 
-               if(empty($goods[$id])){
-                    $goods[$id] = [
-                        'name' => $good->name,
-                        'count' => 1,
-                        'price' => $good->price
-                    ];
+        $goods = $request->getSession(self::BASKET_NAME);
 
-                    $request->setSession(self::BASKET_NAME, $goods);
-                    return 'товар добавлен';
-               }
-               $goods[$id]['count']++;
-               $request->setSession(self::BASKET_NAME, $goods);
-               return 'товар добавлен';
+        if (empty($goods[$id])) {
+            $goods[$id] = [
+                'name' => $good->name,
+                'count' => 1,
+                'price' => $good->price,
+            ];
+
+            $request->setSession(self::BASKET_NAME, $goods);
+            return 'товар добавлен';
+        }
+
+        $goods[$id]['count']++;
+        $request->setSession(self::BASKET_NAME, $goods);
+        return 'товар добавлен';
+    }
+
+    public function getPrice($priceReal, $tax)
+    {
+        return (int)$priceReal + ($priceReal * $tax);
+    }
+
+    protected function getPrivatePrice($priceReal, $tax)
+    {
+        return (int)$priceReal + ($priceReal * $tax);
     }
 }

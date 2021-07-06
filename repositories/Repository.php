@@ -107,5 +107,4 @@ abstract class Repository
         );
         return $this->getDB()->execute($sql);
     }
-
 }

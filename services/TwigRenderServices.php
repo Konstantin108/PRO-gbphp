@@ -24,5 +24,4 @@ class TwigRenderServices implements RenderI
         $template .= '.twig';
         return $this->twig->render($template, $params);
     }
-
 }

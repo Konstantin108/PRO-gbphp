@@ -15,5 +15,4 @@ class GoodRepository extends Repository
     {
         return Good::class;
     }
-
 }

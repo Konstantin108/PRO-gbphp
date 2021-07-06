@@ -31,5 +31,4 @@ class RenderServices implements RenderI
         include dirname(__DIR__) . '/views/' . $template . '.php';
         return ob_get_clean();
     }
-
 }

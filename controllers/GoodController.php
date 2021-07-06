@@ -86,5 +86,4 @@ class GoodController extends Controller
         header('Location: /good/all');   //<--путь изменён для twig
         return '';
     }
-
 }

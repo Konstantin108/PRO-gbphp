@@ -1,6 +1,6 @@
 <?php
-/** @var \app\models\Good good */
-/** @var \app\models\Good[] goods */
+/** @var \app\models\Good $good */
+/** @var \app\models\Good[] $goods */
 ?>
 <?php if (!$good->id)  : ?>
     <h1 style="color: blue">Добавление нового товара</h1>

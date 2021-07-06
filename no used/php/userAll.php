@@ -1,5 +1,6 @@
 <?php
 /** @var \app\models\User[] $users */
+/** @var \app\models\User $user */
 ?>
 <a href="?p=user&a=updateUser&id=<?= $user->id ?>">Добавить нового пользователя</a>
 <?php foreach ($users as $user) : ?>

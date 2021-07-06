@@ -1,20 +1,20 @@
 {% extends 'layouts/main.twig' %}
 {% block title %}Список пользователей{% endblock %}
 {% block content %}
-<a href="/user/updateUser/?id={{ user.id }}">Добавить нового пользователя</a>
-{% for user in users %}
-    <h2>{{  user.login }}</h2>
-    <h3 class="red_text">{{ user.name }}</h3>
-    <a href="/user/one/?id={{ user.id }}">подробнее</a>
-    {% if user.is_admin == 1 %}
-        <h3 style="color: red">данный пользователь является администратором</h3>
-    {% elseif user.is_admin == 2 %}
-        <h3 style="color: red">данный пользователь имеет расширенные права</h3>
+    <a href="/user/updateUser/?id={{ user.id }}">Добавить нового пользователя</a>
+    {% for user in users %}
+        <h2>{{ user.login }}</h2>
+        <h3 class="red_text">{{ user.name }}</h3>
+        <a href="/user/one/?id={{ user.id }}">подробнее</a>
+        {% if user.is_admin == 1 %}
+            <h3 style="color: red">данный пользователь является администратором</h3>
+        {% elseif user.is_admin == 2 %}
+            <h3 style="color: red">данный пользователь имеет расширенные права</h3>
+        {% else %}
+        {% endif %}
+        <hr>
     {% else %}
-    {% endif %}
-    <hr>
-{% else %}
-    <h3 style="color: red">Список пуст</h3>
-{% endfor %}
+        <h3 style="color: red">Список пуст</h3>
+    {% endfor %}
 {% endblock %}
 

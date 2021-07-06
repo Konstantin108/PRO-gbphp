@@ -22,11 +22,11 @@ li {
     color: red;
 }
 
-.blue_text{
+.blue_text {
     color: blue;
 }
 
-.info_block{
+.info_block {
     width: 460px;
     height: 360px;
     display: flex;
@@ -38,12 +38,12 @@ li {
     position: relative;
 }
 
-.info_text{
+.info_text {
     font-size: 30px;
     color: white;
 }
 
-.back{
+.back {
     position: absolute;
     top: 5px;
     left: 10px;
@@ -55,17 +55,17 @@ li {
     align-items: center;
 }
 
-.back_text{
+.back_text {
     color: white;
     font-size: 20px;
 }
 
-.fa-arrow-left{
+.fa-arrow-left {
     font-size: 20px;
     color: white;
 }
 
-.del{
+.del {
     text-decoration: none;
     font-size: 22px;
     color: aliceblue;
@@ -77,7 +77,7 @@ li {
     border: 1px solid yellow;
 }
 
-.del_block{
+.del_block {
     width: 460px;
     height: 360px;
     display: flex;
@@ -90,17 +90,17 @@ li {
     position: relative;
 }
 
-.del_text{
+.del_text {
     font-size: 24px;
     color: white;
 }
 
-.alarm_text{
+.alarm_text {
     font-size: 22px;
     color: red;
 }
 
-.btn_block{
+.btn_block {
     display: flex;
     width: 260px;
     height: 60px;
@@ -108,7 +108,7 @@ li {
     justify-content: space-between;
 }
 
-.del_group_btn{
+.del_group_btn {
     text-decoration: none;
     font-size: 22px;
     color: aliceblue;
@@ -122,7 +122,7 @@ li {
     cursor: pointer;
 }
 
-.cancel_group_btn{
+.cancel_group_btn {
     text-decoration: none;
     font-size: 22px;
     text-align: center;
@@ -135,7 +135,7 @@ li {
     border: 1px solid yellow;
 }
 
-.image{
+.image {
     width: 200px;
     height: 200px;
 }

@@ -14,23 +14,23 @@ class Container
 
     public function __get($name)
     {
-            if(array_key_exists($name, $this->components)){
+        if (array_key_exists($name, $this->components)) {
             return $this->components[$name];
         }
 
-        if(!array_key_exists($name, $this->componentsData)){
+        if (!array_key_exists($name, $this->componentsData)) {
             throw new \Exception('компонент ' . $name . ' не определен');
 
         }
 
         $className = $this->componentsData[$name]['class'];
-        if(!empty($this->componentsData[$name]['config'])){
+        if (!empty($this->componentsData[$name]['config'])) {
             $config = $this->componentsData[$name]['config'];
             $component = new $className($config);
-        }else{
+        } else {
             $component = new $className();
         }
-        if(method_exists($component, 'setContainer')){
+        if (method_exists($component, 'setContainer')) {
             $component->setContainer($this);
         }
 

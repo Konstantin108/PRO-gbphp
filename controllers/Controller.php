@@ -3,9 +3,7 @@
 namespace app\controllers;
 
 use app\main\Container;
-use app\services\RenderServices;
 use app\services\Request;
-use app\services\RenderI;
 
 abstract class Controller
 {
@@ -20,61 +18,61 @@ abstract class Controller
     protected $container;
 
     /**
-    *   Controller constructor.
-    *   @param $renderer
-    */
+     *   Controller constructor.
+     * @param $renderer
+     */
     public function __construct(Request $request, Container $container)
     {
         $this->container = $container;
         $this->request = $request;
     }
 
-        public function run($action)
-        {
+    public function run($action)
+    {
 
-            if(empty($action)){
-                $action = $this->actionDefault;
-            }
-
-            $action .= "Action";
-
-            if(!method_exists($this, $action)){
-                return '404';
-            }
-            return $this->$action();
+        if (empty($action)) {
+            $action = $this->actionDefault;
         }
 
+        $action .= "Action";
 
-        protected function getId()      //<-- получение id
-        {
-            return $this->request->getId();
+        if (!method_exists($this, $action)) {
+            return '404';
         }
+        return $this->$action();
+    }
 
-        protected function redirect($path = '', $msg = '')
-        {
-            if(!empty($msg)){
-                $_SESSION['msg'] = $msg;
+
+    protected function getId()      //<-- получение id
+    {
+        return $this->request->getId();
+    }
+
+    protected function redirect($path = '', $msg = '')
+    {
+        if (!empty($msg)) {
+            $_SESSION['msg'] = $msg;
+        }
+        if (empty($path)) {
+            if (empty($_SERVER['HTTP_REFERER'])) {
+                $path = '/';
+            } else {
+                $path = $_SERVER['HTTP_REFERER'];
             }
-            if(empty($path)){
-                if(empty($_SERVER['HTTP_REFERER'])){
-                    $path = '/';
-                }else{
-                    $path = $_SERVER['HTTP_REFERER'];
-                }
-            }
-            header('Location: ' . $path);
-            return '';
         }
+        header('Location: ' . $path);
+        return '';
+    }
 
-        protected function render($template, $params = [])
-        {
-              return $this->container->renderer->render($template, $params);
-        }
+    protected function render($template, $params = [])
+    {
+        return $this->container->renderer->render($template, $params);
+    }
 
-        //protected function sendJson($data)
-        //{
-        //   header('Content-Type: application/json');
+    //protected function sendJson($data)
+    //{
+    //   header('Content-Type: application/json');
 //
-        //   return json_encode($data);
-        //}
+    //   return json_encode($data);
+    //}
 }

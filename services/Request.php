@@ -24,11 +24,11 @@ class Request
     {
 
         $pattern = "#(?P<controller>\w+)[/]?(?P<action>\w+)?[/]?[?]?(?P<params>.*)#ui";
-        if(preg_match_all($pattern, $this->requestString, $matches)){
-            if(!empty($matches['controller'][0])){
+        if (preg_match_all($pattern, $this->requestString, $matches)) {
+            if (!empty($matches['controller'][0])) {
                 $this->controllerName = $matches['controller'][0];
             }
-            if(!empty($matches['action'][0])){
+            if (!empty($matches['action'][0])) {
                 $this->actionName = $matches['action'][0];
             }
         }
@@ -53,26 +53,26 @@ class Request
     }
 
     public function getId()
-        {
-            if(empty($this->params['get']['id'])){
-              return 0;
-            }
-              return (int)$this->params['get']['id'];
+    {
+        if (empty($this->params['get']['id'])) {
+            return 0;
         }
+        return (int)$this->params['get']['id'];
+    }
 
-        public function getSession($key = null)
-        {
-            if(empty($key)){
-                return $_SESSION;
-            }
-            if (empty($_SESSION[$key])){
-                return [];
-            }
-            return $_SESSION[$key];
+    public function getSession($key = null)
+    {
+        if (empty($key)) {
+            return $_SESSION;
         }
+        if (empty($_SESSION[$key])) {
+            return [];
+        }
+        return $_SESSION[$key];
+    }
 
-        public function setSession($key, $value)
-        {
-            $_SESSION[$key] = $value;
-        }
+    public function setSession($key, $value)
+    {
+        $_SESSION[$key] = $value;
+    }
 }

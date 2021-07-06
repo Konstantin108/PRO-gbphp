@@ -1,20 +1,21 @@
 <?php
+
 namespace app\models;
 
 use app\services\DB;
 
-    /**
-    *Class Model
-    *@package app\models
-    *@property int id
-    **/
+/**
+ *Class Model
+ * @package app\models
+ * @property int id
+ **/
 abstract class Model
 {
     //protected $db;
     //protected $tableName;
 
 
-    abstract protected static function getTableName():string;
+    abstract protected static function getTableName(): string;
 
     //public function __construct(DB $db)
     //{
@@ -45,8 +46,8 @@ abstract class Model
     {
         $fields = [];
         $params = [];
-        foreach ($this as $fieldName => $value){      //<-- Получение всех столбцов из таблицы
-            if($fieldName == 'id'){
+        foreach ($this as $fieldName => $value) {      //<-- Получение всех столбцов из таблицы
+            if ($fieldName == 'id') {
                 continue;
             }
             $fields[] = $fieldName;
@@ -65,33 +66,33 @@ abstract class Model
 
     protected function update()
     {
-                $fields = [];
-                $params = [];
-                $goodsId = [];
-                foreach ($this as $fieldName => $value){
-                    $fields[] = $fieldName;
-                    $params[":{$fieldName}"] = $value;
-                }
+        $fields = [];
+        $params = [];
+        $goodsId = [];
+        foreach ($this as $fieldName => $value) {
+            $fields[] = $fieldName;
+            $params[":{$fieldName}"] = $value;
+        }
 
-                foreach($fields as $value){
-                    $fixFields[] = $value = $value . ' = :' . $value;
-                }
-                $shiftFields = array_shift($fixFields);
-                $string = implode(', ', $fixFields);
+        foreach ($fields as $value) {
+            $fixFields[] = $value = $value . ' = :' . $value;
+        }
+        $shiftFields = array_shift($fixFields);
+        $string = implode(', ', $fixFields);
 
-                $sql = sprintf(
-                    "UPDATE %s SET %s WHERE %s",      //<-- Заполнение всех столбцов из таблицы
-                    static::getTableName(),
-                    $string,
-                    $shiftFields
-                );
-                static::getDB()->execute($sql, $params);
+        $sql = sprintf(
+            "UPDATE %s SET %s WHERE %s",      //<-- Заполнение всех столбцов из таблицы
+            static::getTableName(),
+            $string,
+            $shiftFields
+        );
+        static::getDB()->execute($sql, $params);
 
     }
 
     public function save()
     {
-        if(empty($this->id)){
+        if (empty($this->id)) {
             $this->insert();
             return;
         }
@@ -100,12 +101,12 @@ abstract class Model
 
     public function delete()
     {
-           $sql = sprintf(
-               "DELETE FROM %s WHERE id = %s",
-               static::getTableName(),
-               $this->id
-           );
-           static::getDB()->execute($sql);
+        $sql = sprintf(
+            "DELETE FROM %s WHERE id = %s",
+            static::getTableName(),
+            $this->id
+        );
+        static::getDB()->execute($sql);
     }
 
 }

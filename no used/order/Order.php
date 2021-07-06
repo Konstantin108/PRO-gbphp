@@ -1,4 +1,5 @@
 <?php
+
 namespace app\entities;
 
 class Order extends Entity

@@ -33,17 +33,17 @@ class App
         //spl_autoload_register([(new Autoload()), 'load']);
 
         $controllerName = 'good';      //<-- настройка контроллера
-        if(!empty($request->getActionName())){
+        if (!empty($request->getActionName())) {
             $controllerName = $request->getControllerName();
         }
 
         $controllerClass = 'app\\controllers\\' . ucfirst($controllerName) . 'Controller';
 
-        if(class_exists($controllerClass)){
+        if (class_exists($controllerClass)) {
             $renderer = new \app\services\TwigRenderServices();
             $controller = new $controllerClass($request, $this->container);
             echo $controller->run($request->getActionName());
-        }else{
+        } else {
             echo '404';
         }
     }

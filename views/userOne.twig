@@ -1,19 +1,19 @@
 {% extends 'layouts/main.twig' %}
 {% block title %}{{ user.login }}{% endblock %}
 {% block content %}
-<h2>{{ user.login }}</h2>
-<h3 class="red_text">{{ user.name }}</h3>
-<h3 class="blue_text">{{ user.position }}</h3>
-{% if user.is_admin == 1 %}
+    <h2>{{ user.login }}</h2>
+    <h3 class="red_text">{{ user.name }}</h3>
+    <h3 class="blue_text">{{ user.position }}</h3>
+    {% if user.is_admin == 1 %}
         <h3 style="color: red">данный пользователь является администратором</h3>
-{% elseif user.is_admin == 2 %}
+    {% elseif user.is_admin == 2 %}
         <h3 style="color: red">данный пользователь имеет расширенные права</h3>
         <a href="/user/updateUser/?id={{ user.id }}">редактировать</a>
         <a href="/user/delUser/?id={{ user.id }}" class="del">удалить пользователя</a><br><br>
-{% else %}
+    {% else %}
         <a href="/user/updateUser/?id={{ user.id }}">редактировать</a>
         <a href="/user/delUser/?id={{ user.id }}" class="del">удалить пользователя</a><br><br>
-{% endif %}
-<a href="/user/all">назад</a>
-<hr>
+    {% endif %}
+    <a href="/user/all">назад</a>
+    <hr>
 {% endblock %}

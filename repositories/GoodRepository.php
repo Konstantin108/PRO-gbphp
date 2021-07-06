@@ -6,12 +6,12 @@ use app\entities\Good;
 
 class GoodRepository extends Repository
 {
-    protected function getTableName() :string
+    protected function getTableName(): string
     {
         return 'goods';
     }
 
-    protected function getEntityName() :string
+    protected function getEntityName(): string
     {
         return Good::class;
     }

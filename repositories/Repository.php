@@ -1,17 +1,18 @@
 <?php
+
 namespace app\repositories;
 
-use app\main\Container;
 use app\entities\Entity;
-use app\services\DB;
+use app\main\Container;
 
 abstract class Repository
 {
 
     protected $container;
 
-    abstract protected function getTableName():string;
-    abstract protected function getEntityName():string;
+    abstract protected function getTableName(): string;
+
+    abstract protected function getEntityName(): string;
 
     public function setContainer(Container $container)
     {
@@ -42,8 +43,8 @@ abstract class Repository
     {
         $fields = [];
         $params = [];
-        foreach ($entity as $fieldName => $value){      //<-- Получение всех столбцов из таблицы
-            if($fieldName == 'id'){
+        foreach ($entity as $fieldName => $value) {      //<-- Получение всех столбцов из таблицы
+            if ($fieldName == 'id') {
                 continue;
             }
             $fields[] = $fieldName;
@@ -63,34 +64,34 @@ abstract class Repository
 
     protected function update(Entity $entity)
     {
-                $fields = [];
-                $params = [];
-                $goodsId = [];
-                foreach ($entity as $fieldName => $value){
-                    $fields[] = $fieldName;
-                    $params[":{$fieldName}"] = $value;
-                }
+        $fields = [];
+        $params = [];
+        $goodsId = [];
+        foreach ($entity as $fieldName => $value) {
+            $fields[] = $fieldName;
+            $params[":{$fieldName}"] = $value;
+        }
 
-                foreach($fields as $value){
-                    $fixFields[] = $value = $value . ' = :' . $value;
-                }
-                $shiftFields = array_shift($fixFields);
-                $string = implode(', ', $fixFields);
+        foreach ($fields as $value) {
+            $fixFields[] = $value = $value . ' = :' . $value;
+        }
+        $shiftFields = array_shift($fixFields);
+        $string = implode(', ', $fixFields);
 
-                $sql = sprintf(
-                    "UPDATE %s SET %s WHERE %s",      //<-- Заполнение всех столбцов из таблицы
-                    $this->getTableName(),
-                    $string,
-                    $shiftFields
-                );
-                return $this->getDB()->execute($sql, $params);
-                return $entity;
+        $sql = sprintf(
+            "UPDATE %s SET %s WHERE %s",      //<-- Заполнение всех столбцов из таблицы
+            $this->getTableName(),
+            $string,
+            $shiftFields
+        );
+        return $this->getDB()->execute($sql, $params);
+        return $entity;
 
     }
 
     public function save(Entity $entity)
     {
-        if(empty($entity->id)){
+        if (empty($entity->id)) {
             $this->insert($entity);
             return;
         }
@@ -99,12 +100,12 @@ abstract class Repository
 
     public function delete(Entity $entity)
     {
-           $sql = sprintf(
-               "DELETE FROM %s WHERE id = %s",
-               $this->getTableName(),
-               $entity->id                                   //$entity вместо $this
-           );
-           return $this->getDB()->execute($sql);
+        $sql = sprintf(
+            "DELETE FROM %s WHERE id = %s",
+            $this->getTableName(),
+            $entity->id                                   //$entity вместо $this
+        );
+        return $this->getDB()->execute($sql);
     }
 
 }

@@ -19,23 +19,23 @@ class OrderController extends Controller
         $id = $this->getId();
         $person = (new OrderRepository())->getOne($id);   //<--изменение для репозиториев и сущностей
         return $this->renderer->render('orderOne',
-                        [
-                            'order' => $person,
-                            'title' => $person->login
-                        ]
-                     );
+            [
+                'order' => $person,
+                'title' => $person->login
+            ]
+        );
     }
 
     public function delOrderAction()
     {
-            $id = $this->getId();
-            $person = (new OrderRepository())->getOne($id);   //<--изменение для репозиториев и сущностей
-            return $this->renderer->render('orderDel',
-                             [
-                                'order' => $person,
-                                'title' => 'Удаление'
-                             ]
-                         );
+        $id = $this->getId();
+        $person = (new OrderRepository())->getOne($id);   //<--изменение для репозиториев и сущностей
+        return $this->renderer->render('orderDel',
+            [
+                'order' => $person,
+                'title' => 'Удаление'
+            ]
+        );
     }
 
     public function getDelOrderAction()

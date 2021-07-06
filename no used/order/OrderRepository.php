@@ -6,12 +6,12 @@ use app\entities\Order;
 
 class OrderRepository extends Repository
 {
-    protected function getTableName() :string
+    protected function getTableName(): string
     {
         return 'orders';
     }
 
-    protected function getEntityName() :string
+    protected function getEntityName(): string
     {
         return Order::class;
     }

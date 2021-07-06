@@ -1,4 +1,5 @@
 <?php
+
 namespace app\entities;
 
 class User extends Entity
@@ -9,4 +10,5 @@ class User extends Entity
     public $password;
     public $is_admin;
     public $position;
+    public $avatar;
 }

@@ -41,12 +41,12 @@ class BasketServiceTest extends TestCase
     }
 
     /**
-    *   @param $priceReal
-    *   @param $tax
-    *   @param $expected
-    *
-    *   @dataProvider getDataForTestGetPrice
-    */
+     * @param $priceReal
+     * @param $tax
+     * @param $expected
+     *
+     * @dataProvider getDataForTestGetPrice
+     */
     public function testGetPrice($priceReal, $tax, $expected)
     {
         $basketServices = new BasketService();
@@ -58,17 +58,17 @@ class BasketServiceTest extends TestCase
 //-------------------- тестирование приватного класса --------------------//
 
     /**
-    *   @param $priceReal
-    *   @param $tax
-    *   @param $expected
-    *
-    *   @dataProvider getDataForTestGetPrice
-    */
+     * @param $priceReal
+     * @param $tax
+     * @param $expected
+     *
+     * @dataProvider getDataForTestGetPrice
+     */
     public function testGetPrivatePrice($priceReal, $tax, $expected)   //<-- тестирование приватного класса
     {
         $method = new \ReflectionMethod(
-                BasketService::class,   //<-- получаем полное имя класса с путём до него
-                'getPrivatePrice'
+            BasketService::class,   //<-- получаем полное имя класса с путём до него
+            'getPrivatePrice'
         );
         $method->setAccessible(true);
 

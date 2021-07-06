@@ -1,4 +1,5 @@
 <?php
+
 namespace app\entities;
 
 class Good extends Entity
@@ -7,4 +8,5 @@ class Good extends Entity
     public $name;
     public $price;
     public $info;
+    public $img;
 }

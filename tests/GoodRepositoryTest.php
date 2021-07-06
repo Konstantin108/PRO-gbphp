@@ -2,9 +2,8 @@
 
 namespace app\tests;
 
-use app\repositories\GoodRepository;
 use app\entities\Good;
-use PHPUnit\Framework\MockObject\MockObject;
+use app\repositories\GoodRepository;
 use PHPUnit\Framework\TestCase;
 
 class GoodRepositoryTest extends TestCase
@@ -13,8 +12,8 @@ class GoodRepositoryTest extends TestCase
     {
 
         $method = new \ReflectionMethod(
-                GoodRepository::class,
-                'getTableName'
+            GoodRepository::class,
+            'getTableName'
         );
         $method->setAccessible(true);
 
@@ -27,8 +26,8 @@ class GoodRepositoryTest extends TestCase
     {
 
         $method = new \ReflectionMethod(
-                GoodRepository::class,
-                'getEntityName'
+            GoodRepository::class,
+            'getEntityName'
         );
         $method->setAccessible(true);
 

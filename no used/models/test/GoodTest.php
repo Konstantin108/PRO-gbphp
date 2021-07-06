@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models\test;
 
 use app\models\Model;
@@ -11,7 +12,7 @@ class GoodTest extends Model
     public $price;
     public $info;
 
-    protected function getTableName():string
+    protected function getTableName(): string
     {
         return 'goodsTest';
     }

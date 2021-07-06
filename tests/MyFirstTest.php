@@ -7,12 +7,12 @@ use PHPUnit\Framework\TestCase;
 class MyFirstTest extends TestCase
 {
     /**
-    *   @dataProvider getDataForFirstTest
-    */
+     * @dataProvider getDataForFirstTest
+     */
     public function testFirst($a, $b, $expected)
     {
-       $c = $a + $b;
-       $this->assertEquals($expected, $c);
+        $c = $a + $b;
+        $this->assertEquals($expected, $c);
     }
 
     public function testSecond()

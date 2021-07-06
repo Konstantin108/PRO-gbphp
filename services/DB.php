@@ -1,6 +1,6 @@
 <?php
+
 namespace app\services;
-use app\traits\SingletonTrait;
 class DB
 {
 
@@ -15,11 +15,11 @@ class DB
 
     public function getConnection()
     {
-        if (empty($this->connection)){
+        if (empty($this->connection)) {
             $this->connection = new \PDO(
-            $this->getSdn(),
-            $this->config['login'],
-            $this->config['password']
+                $this->getSdn(),
+                $this->config['login'],
+                $this->config['password']
             );
             $this->connection->setAttribute(
                 \PDO::ATTR_DEFAULT_FETCH_MODE,
@@ -31,7 +31,7 @@ class DB
 
     private function getSdn()
     {
-        return sprintf (
+        return sprintf(
             "%s:host=%s;dbname=%s;charset=%s",
             $this->config['driver'],
             $this->config['host'],
@@ -60,14 +60,14 @@ class DB
     public function getObject($sql, $className, $params = [])
     {
         $PDOStatement = $this->query($sql, $params);
-        $PDOStatement ->setFetchMode(\PDO::FETCH_CLASS, $className);
+        $PDOStatement->setFetchMode(\PDO::FETCH_CLASS, $className);
         return $PDOStatement->fetch();
     }
 
     public function getAllObjects($sql, $className, $params = [])
     {
         $PDOStatement = $this->query($sql, $params);
-        $PDOStatement ->setFetchMode(\PDO::FETCH_CLASS, $className);
+        $PDOStatement->setFetchMode(\PDO::FETCH_CLASS, $className);
         return $PDOStatement->fetchAll();
     }
 

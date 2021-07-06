@@ -1,13 +1,13 @@
 {% extends 'layouts/main.twig' %}
 {% block title %}Список товаров{% endblock %}
 {% block content %}
-<a href="/good/updateGood/?id={{ good.id }}">Добавить новый товар</a>
-{% for good in goods %}
-    <h2>{{ good.name }}</h2>
-    <h3>Цена товара: {{ good.price }}р.</h3>
-    <a href="/good/one/?id={{ good.id }}">подробнее</a>
-    <hr>
-{% else %}
-    <h3 style="color: red">Список пуст</h3>
-{% endfor %}
+    <a href="/good/updateGood/?id={{ good.id }}">Добавить новый товар</a>
+    {% for good in goods %}
+        <h2>{{ good.name }}</h2>
+        <h3>Цена товара: {{ good.price }}р.</h3>
+        <a href="/good/one/?id={{ good.id }}">подробнее</a>
+        <hr>
+    {% else %}
+        <h3 style="color: red">Список пуст</h3>
+    {% endfor %}
 {% endblock %}

@@ -2,9 +2,8 @@
 
 namespace app\tests;
 
-use app\repositories\UserRepository;
 use app\entities\User;
-use PHPUnit\Framework\MockObject\MockObject;
+use app\repositories\UserRepository;
 use PHPUnit\Framework\TestCase;
 
 class UserRepositoryTest extends TestCase
@@ -13,8 +12,8 @@ class UserRepositoryTest extends TestCase
     {
 
         $method = new \ReflectionMethod(
-                UserRepository::class,
-                'getTableName'
+            UserRepository::class,
+            'getTableName'
         );
         $method->setAccessible(true);
 
@@ -27,8 +26,8 @@ class UserRepositoryTest extends TestCase
     {
 
         $method = new \ReflectionMethod(
-                UserRepository::class,
-                'getEntityName'
+            UserRepository::class,
+            'getEntityName'
         );
         $method->setAccessible(true);
 
